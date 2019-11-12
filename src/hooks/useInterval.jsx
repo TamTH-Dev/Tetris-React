@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 
-const useInterval = (callback, delay) => {
+// eslint-disable-next-line import/prefer-default-export
+export const useInterval = (callback, delay) => {
   const savedCallback = useRef();
   // Remember the latest callback.
   useEffect(() => {
@@ -23,4 +24,3 @@ const useInterval = (callback, delay) => {
   }, [delay]);
 };
 
-export default useInterval();
