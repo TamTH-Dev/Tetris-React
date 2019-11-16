@@ -5,7 +5,7 @@ import { createStage, checkCollision } from '../gameHelpers';
 // Components
 import Stage from './Stage';
 import Display from './Display';
-import StartButton from './StartButton';
+import ControlButton from './ControlButton';
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
@@ -41,6 +41,14 @@ const Tetris = () => {
     setLevel(0);
   };
 
+  const stopGame = () => {
+    setDroptime(999999999);
+  };
+
+  const resumeGame = () => {
+    setDroptime(500 / (level + 1) + 200);
+  };
+
   const drop = () => {
     // Increase level when player has cleared 10 rows
     if (rows > (level + 1) * 10) {
@@ -61,26 +69,26 @@ const Tetris = () => {
 
   const keyUp = ({ keyCode }) => {
     if (!gameOver) {
-      if (keyCode === 40) {
+      if (keyCode === 40 || keyCode === 83) {
         setDroptime(500 / (level + 1) + 200);
       }
     }
   };
 
   const dropPlayer = () => {
-    setDroptime(null);
+    // setDroptime(null);
     drop();
   };
 
   const move = ({ keyCode }) => {
     if (!gameOver) {
-      if (keyCode === 37) {
+      if (keyCode === 37 || keyCode === 65) {
         movePlayer(-1);
-      } else if (keyCode === 39) {
+      } else if (keyCode === 39 || keyCode === 68) {
         movePlayer(1);
-      } else if (keyCode === 40) {
+      } else if (keyCode === 40 || keyCode === 83) {
         dropPlayer();
-      } else if (keyCode === 38) {
+      } else if (keyCode === 38 || keyCode === 87) {
         playerRotate(stage, 1);
       }
     }
@@ -110,7 +118,12 @@ const Tetris = () => {
                 <Display text={`Level: ${level}`} />
               </div>
             )}
-            <StartButton callback={startGame} />
+            <ControlButton
+              startGame={startGame}
+              stopGame={stopGame}
+              resumeGame={resumeGame}
+              droptime={droptime}
+            />
           </aside>
         </StyledTetris>
       </StyledTetrisWrapper>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 // eslint-disable-next-line import/prefer-default-export
-export const StyledStartButton = styled.button`
+export const StyledControlButton = styled.button`
   box-sizing: border-box;
   margin: 0 0 20px 0;
   padding: 20px;
